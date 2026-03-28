@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Premium Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
 
-  <title>Hospital System</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Q Care</title>
 </head>
 
 <body>
 
-  <main class="main">
-    <h1 class="title">Hospital Management System</h1>
+  <div class="pattern">
+    <div class="pattern-inner" id="patternText"></div>
+  </div>
 
-    <!-- Home (2 boxes) -->
-    <section id="home" class="grid"></section>
+  <main class="container">
+    <div class="content">
 
-    <!-- Dynamic Content -->
-    <section id="content" class="grid hidden"></section>
+      <!-- 🔥 LOGO WRAPPER -->
+      <div class="logo">
+        <img src="src/assets/logo.jpg" alt="Q Care Logo">
+      </div>
+
+      <!-- 🔥 PREMIUM TAGLINE -->
+      <p class="tagline">
+        Your well <span>wisher</span>
+      </p>
+
+      <div class="auth-card">
+
+        <button class="google-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+          Continue with Google
+        </button>
+
+        <div class="divider"><span>or</span></div>
+
+        <button class="phone-btn">
+          Continue with Phone (OTP)
+        </button>
+
+      </div>
+
+    </div>
   </main>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="src/main.js"></script>
 </body>
+
 </html>
