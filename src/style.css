@@ -14,6 +14,7 @@ body {
   background: #050a16;
   color: white;
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* ===== BACKGROUND ===== */
@@ -73,16 +74,19 @@ body {
   z-index: 2;
 
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 100svh;
 
-  padding: 20px;
+  display: grid;
+ align-items: center;
+ justify-content: center;
+
+  padding: 20px 16px;
+  width: 100%;
 }
 
 .content {
-  width: 100%;
-  max-width: 420px;
+  width: min(420px, 100%);   /* 👈 KEY FIX */
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -295,8 +299,26 @@ button {
   .container {
     padding: 16px;   /* reduce side pressure */
   }
+}
 
-  .content {
-    max-width: 100%; /* prevent squeeze illusion */
+
+
+@media (max-width: 480px) {
+  .pattern-inner {
+    opacity: 0.04;
   }
 }
+
+
+
+@media (max-width: 480px) {
+  @keyframes movePattern {
+    0% {
+      transform: translate(-50%, -50%) rotate(-25deg);
+    }
+    100% {
+      transform: translate(calc(-50% - 100px), calc(-50% - 100px)) rotate(-25deg);
+    }
+  }
+}
+
