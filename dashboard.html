@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q Care Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="container">
+    <div class="content">
+      <h1>Welcome to Q Care 🏥</h1>
+      <p>You are successfully logged in.</p>
+
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </main>
+
+  <script>
+    // Protect page (fake auth check)
+    const isLoggedIn = localStorage.getItem("auth");
+
+    if (!isLoggedIn) {
+      window.location.replace("index.html");
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("auth");
+      window.location.replace("index.html");
+    });
+  </script>
+
+</body>
+</html>
