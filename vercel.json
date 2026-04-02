@@ -2,6 +2,7 @@
 {
   "routes": [
     { "src": "/dashboard.html", "dest": "/dashboard.html" },
+    { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
