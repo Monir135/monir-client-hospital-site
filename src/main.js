@@ -2,9 +2,8 @@ import './style.css';
 
 /* 🔥 PROTECT LOGIN PAGE */
 if (localStorage.getItem("auth")) {
-  window.location.replace("dashboard.html");
+window.location.href = "/dashboard.html";
 }
-
 /* 🔥 GENERATE BACKGROUND TEXT */
 const container = document.getElementById('patternText');
 
@@ -52,7 +51,7 @@ verifyOtpBtn.addEventListener('click', () => {
 
     otpModal.style.display = "none"; // ✅ ADD HERE
 
-    window.location.replace("dashboard.html");
+window.location.href = "/dashboard.html";
   } else {
     alert("Invalid OTP");
   }
@@ -93,7 +92,7 @@ googleUser.addEventListener('click', () => {
 
   setTimeout(() => {
     localStorage.setItem("auth", "true");
-    window.location.replace("dashboard.html");
+window.location.href = "/dashboard.html";
   }, 1000);
 });
 
@@ -115,6 +114,6 @@ function fakeLogin(method) {
 
   setTimeout(() => {
     localStorage.setItem("auth", "true");
-    window.location.replace("dashboard.html");
+window.location.href = "/dashboard.html";
   }, 800);
 }
