@@ -87,20 +87,96 @@ body {
 #logoutBtn:active {
   transform: scale(0.97);
 }
+
+
+
+
+
+.search-bar {
+  padding: 16px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+
+  font-size: 14px;
+
+  background: rgba(255,255,255,0.08);
+  color: white;
+
+  backdrop-filter: blur(10px);
+}
+
+/* 🔥 CITY CARD */
+.city-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* city name overlay */
+.city-name {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  background: rgba(0,0,0,0.6);
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  z-index: 2;
+}
+
+.section-title {
+  padding: 16px 16px 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  color: #e2e8f0;
+}
 </style>
+
+  
 </head>
 <body>
 
- <main class="container">
+<main class="container">
   <div class="content">
     
     <div class="dashboard-card">
 
-      <div class="image-grid">
-        <img src="https://i.ibb.co/3mFPDfvk/IMG-20260405-WA0002.jpg">
-        <img src="https://i.ibb.co/hx5yknqh/IMG-20260405-WA0001.jpg">
-        <img src="https://i.ibb.co/n8bhNJBT/IMG-20260405-WA0000.jpg">
-      </div>
+      <h2 class="section-title">Select City</h2>
+
+     <!-- 🔥 SEARCH BAR -->
+<div class="search-bar">
+  <input type="text" id="citySearch" placeholder="Select city..." />
+</div>
+
+<div class="image-grid" id="cityGrid">
+
+  <div class="city-card" data-city="Bangalore">
+    <p class="city-name">Bangalore</p>
+    <img src="https://i.ibb.co/3mFPDfvk/IMG-20260405-WA0002.jpg">
+  </div>
+
+  <div class="city-card" data-city="Mumbai">
+    <p class="city-name">Mumbai</p>
+    <img src="https://i.ibb.co/hx5yknqh/IMG-20260405-WA0001.jpg">
+  </div>
+
+  <div class="city-card" data-city="Delhi">
+    <p class="city-name">Delhi</p>
+    <img src="https://i.ibb.co/n8bhNJBT/IMG-20260405-WA0000.jpg">
+  </div>
+
+</div>
 
       <button id="logoutBtn">Logout</button>
 
@@ -121,6 +197,27 @@ body {
       localStorage.removeItem("auth");
       window.location.replace("index.html");
     });
+
+
+
+
+    
+const searchInput = document.getElementById("citySearch");
+const cityCards = document.querySelectorAll(".city-card");
+
+searchInput.addEventListener("input", () => {
+  const value = searchInput.value.toLowerCase();
+
+  cityCards.forEach(card => {
+    const city = card.getAttribute("data-city").toLowerCase();
+
+    if (city.includes(value)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
   </script>
 
 </body>
