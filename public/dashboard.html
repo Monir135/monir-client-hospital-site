@@ -141,6 +141,86 @@ body {
   text-align: left;
   color: #e2e8f0;
 }
+
+
+/* 🔥 POPUP BACKDROP */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+/* popup box */
+.popup-content {
+  width: 95%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background: #0b1220;
+  border-radius: 16px;
+  padding: 16px;
+
+  position: relative;
+}
+
+/* close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* hospital card */
+.hospital-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.hospital-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* hospital name */
+.hospital-name {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background: rgba(0,0,0,0.6);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* ⭐ rating */
+.rating {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+
+  background: rgba(0,0,0,0.6);
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  color: gold;
+}
 </style>
 
   
@@ -185,6 +265,19 @@ body {
   </div>
 </main>
 
+<!-- 🔥 HOSPITAL POPUP -->
+<div id="hospitalPopup" class="popup">
+  <div class="popup-content">
+
+    <span id="closePopup" class="close-btn">&times;</span>
+
+    <h2 id="popupTitle" class="section-title">Hospitals</h2>
+
+    <div class="image-grid" id="hospitalGrid"></div>
+
+  </div>
+</div>
+
   <script>
     // Protect page (fake auth check)
     const isLoggedIn = localStorage.getItem("auth");
@@ -217,6 +310,67 @@ searchInput.addEventListener("input", () => {
       card.style.display = "none";
     }
   });
+});
+
+
+
+// 🔥 POPUP ELEMENTS
+const popup = document.getElementById("hospitalPopup");
+const closePopup = document.getElementById("closePopup");
+const hospitalGrid = document.getElementById("hospitalGrid");
+const popupTitle = document.getElementById("popupTitle");
+
+// 🔥 HOSPITAL DATA
+const hospitalData = {
+  Bangalore: [
+    { name: "Apollo Hospital", img: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80" },
+    { name: "Manipal Hospital", img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" }
+  ],
+  Mumbai: [
+    { name: "Lilavati Hospital", img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" },
+    { name: "Kokilaben Hospital", img: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=800&q=80" }
+  ],
+  Delhi: [
+    { name: "AIIMS", img: "https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=800&q=80" },
+    { name: "Fortis Hospital", img: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=800&q=80" }
+  ]
+};
+
+// 🔥 OPEN POPUP
+document.querySelectorAll(".city-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const city = card.getAttribute("data-city");
+
+    popup.style.display = "flex";
+    popupTitle.innerText = city + " Hospitals";
+
+    hospitalGrid.innerHTML = "";
+const hospitals = hospitalData[city] || [];
+    hospitals.forEach(h => {
+      const div = document.createElement("div");
+      div.className = "hospital-card";
+
+      div.innerHTML = `
+        <img src="${h.img}">
+        <p class="hospital-name">${h.name}</p>
+        <p class="rating">★★★★☆</p>
+      `;
+
+      hospitalGrid.appendChild(div);
+    });
+  });
+});
+
+// 🔥 CLOSE BUTTON
+closePopup.addEventListener("click", () => {
+  popup.style.display = "none";
+});
+
+// 🔥 CLICK OUTSIDE TO CLOSE
+popup.addEventListener("click", (e) => {
+  if (e.target === popup) {
+    popup.style.display = "none";
+  }
 });
   </script>
 
